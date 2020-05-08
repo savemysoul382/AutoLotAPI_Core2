@@ -50,10 +50,7 @@ namespace AutoLotAPI_Core2
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(handler: async (context) =>
-            {
-                await context.Response.WriteAsync(text: "Hello World!");
-            });
+            app.UseMvc();
         }
     }
 }

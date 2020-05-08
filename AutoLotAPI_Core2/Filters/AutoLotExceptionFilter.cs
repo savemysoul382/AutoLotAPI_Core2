@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ namespace AutoLotAPI_Core2.Filters
 {
     public class AutoLotExceptionFilter : IExceptionFilter
     {
-        private readonly bool is_development;
+        private readonly Boolean is_development;
         public AutoLotExceptionFilter(IHostingEnvironment env)
         {
             this.is_development = env.IsDevelopment();
@@ -16,9 +17,9 @@ namespace AutoLotAPI_Core2.Filters
         public void OnException(ExceptionContext context)
         {
             var ex = context.Exception;
-            string stack_trace = (this.is_development) ? ex.StackTrace : string.Empty;
+            String stack_trace = (this.is_development) ? ex.StackTrace : String.Empty;
             IActionResult action_result;
-            string message = ex.Message;
+            String message = ex.Message;
             if (ex is DbUpdateConcurrencyException)
             {
                 //Returns a 400

@@ -1,0 +1,40 @@
+﻿@using AutoLotDAL_Core2.Models
+@model IEnumerable<Inventory>
+@functions
+{
+    public IList<Inventory> SortCars(IList<Inventory> cars)
+    {
+        var list = from s in cars orderby s.PetName select s;
+        return list.ToList();
+    }
+}
+@{
+    ViewData[index: "Title"] = "Index";
+}
+<h2>Index</h2>
+
+<p>
+    <a asp-action="CreateAsync">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(expression: model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(expression: model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(expression: model => model.PetName)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in SortCars(cars: Model.ToList()))
+    {
+        @Html.DisplayFor(expression: modelItem => item, templateName: "InventoryList")
+    }
+    </tbody>
+</table>
